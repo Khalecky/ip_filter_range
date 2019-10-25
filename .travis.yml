@@ -6,14 +6,8 @@ addons:
     packages:
     - libboost-test-dev
 
-install:
-# Install conan
-  - sudo pip install --upgrade pip
-  - sudo pip install conan
-# Automatic detection of your arch, compiler, etc.
-  - conan user
 script:
-- conan install .
+- conan install . --build=missing -s compiler.libcxx=libstdc++11
 - cmake .
 - cmake --build .
 - cmake --build . --target test
