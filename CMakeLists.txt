@@ -8,9 +8,6 @@ message("**** START CREATE MAKEFILE FOR ${PROJECT_NAME}: version=${PROJECT_VERSI
 message("************************************************************************")
 #message("project directory is " ${PROJECT_SOURCE_DIR})
 
-message("******************* conan install *************************************")
-execute_process(COMMAND conan install ${PROJECT_SOURCE_DIR}/conanfile.txt)
-message("************************************************************************")
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 

@@ -6,6 +6,7 @@ addons:
     packages:
     - libboost-test-dev
 script:
+- conan install .
 - cmake .
 - cmake --build .
 - cmake --build . --target test
