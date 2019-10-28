@@ -22,7 +22,8 @@ struct IP
 
     explicit IP(const std::string &_ip_str) : ip_str(_ip_str)
     {
-        for_each(ip_str | split('.'), [&](const std::string& byte_str) {
+        const StringList& bytes_str = ip_str | split('.') | to<StringList>;
+        for_each (bytes_str, [&](const std::string& byte_str) {
             bytes.push_back(static_cast<unsigned char>(std::stoi(byte_str)));
         });
     }

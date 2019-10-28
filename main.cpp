@@ -18,7 +18,7 @@ int main()
 
         for(std::string line; std::getline(std::cin, line);)
         {
-            StringList v = line | split('\t');
+            const StringList& v = line | split('\t') | to<StringList>;
 
             ip_pool.push_back( IP(v.at(0)) );
         }
