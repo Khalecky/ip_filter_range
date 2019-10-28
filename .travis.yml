@@ -6,7 +6,7 @@ addons:
     packages:
     - libboost-test-dev
 install:
-- pip install --upgrade pip
+- sudo pip install --upgrade pip
 - pip install conan
 - conan user
 script:
