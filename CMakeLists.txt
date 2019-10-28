@@ -58,4 +58,4 @@ include(CPack)
 
 enable_testing()
 
-add_test(tests bin/app_tests)
+add_test(tests app_tests)
