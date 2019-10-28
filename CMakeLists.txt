@@ -18,13 +18,6 @@ configure_file(version.h.in ${PROJECT_SOURCE_DIR}/version.h)
 add_executable(range main.cpp )
 add_executable(app_tests tests/test_module.cpp)
 
-#copy file with ip pool for tests
-file(COPY ${PROJECT_SOURCE_DIR}/tests/ip_filter.tst
-     DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/bin/)
-file(COPY ${PROJECT_SOURCE_DIR}/tests/ip_filter_first_byte.tst
-     DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/bin/)
-file(COPY ${PROJECT_SOURCE_DIR}/tests/ip_filter_two_bytes.tst
-     DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/bin/)
 #------------------------
 
 set_target_properties(range app_tests PROPERTIES
@@ -58,4 +51,13 @@ include(CPack)
 
 enable_testing()
 
+
+SET (BUILD_BIN_DIR "${CMAKE_CURRENT_BINARY_DIR}/bin")
+#copy file with ip pool for tests
+file(COPY ${PROJECT_SOURCE_DIR}/tests/ip_filter.tst
+     DESTINATION ${BUILD_BIN_DIR})
+file(COPY ${PROJECT_SOURCE_DIR}/tests/ip_filter_first_byte.tst
+     DESTINATION ${BUILD_BIN_DIR})
+file(COPY ${PROJECT_SOURCE_DIR}/tests/ip_filter_two_bytes.tst
+     DESTINATION ${BUILD_BIN_DIR})
 add_test(tests bin/app_tests)
