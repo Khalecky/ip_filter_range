@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.2)
 #SET (CMAKE_C_COMPILER             "clang")
 #SET (CMAKE_CXX_COMPILER             "clang++")
 
-project(ip_filter VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+project(range VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 
 message("**** START CREATE MAKEFILE FOR ${PROJECT_NAME}: version=${PROJECT_VERSION}; build_number=${PROJECT_VERSION_PATCH} ****")
 message("************************************************************************")
@@ -15,19 +15,19 @@ conan_basic_setup()
 find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 
 configure_file(version.h.in ${PROJECT_SOURCE_DIR}/version.h)
-add_executable(ip_filter main.cpp )
+add_executable(range main.cpp )
 add_executable(app_tests tests/test_module.cpp)
 
 #copy file with ip pool for tests
 file(COPY ${PROJECT_SOURCE_DIR}/tests/ip_filter.tst
-     DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+     DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/bin)
 file(COPY ${PROJECT_SOURCE_DIR}/tests/ip_filter_first_byte.tst
-     DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+     DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/bin)
 file(COPY ${PROJECT_SOURCE_DIR}/tests/ip_filter_two_bytes.tst
-     DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+     DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/bin)
 #------------------------
 
-set_target_properties(ip_filter app_tests PROPERTIES
+set_target_properties(range app_tests PROPERTIES
     CXX_STANDARD 14
     CXX_STANDARD_REQUIRED ON
     COMPILE_OPTIONS "-Wpedantic;-Wall;-Wextra"
@@ -42,7 +42,7 @@ set_target_properties(app_tests PROPERTIES
 target_link_libraries(app_tests ${Boost_LIBRARIES})
 
 
-install(TARGETS ip_filter RUNTIME DESTINATION bin)
+install(TARGETS range RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
 
@@ -58,4 +58,4 @@ include(CPack)
 
 enable_testing()
 
-add_test(tests app_tests)
+add_test(tests bin/app_tests)
