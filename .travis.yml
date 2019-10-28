@@ -8,7 +8,7 @@ addons:
 
 install:
 - sudo -H pip install --upgrade pip
-- sudo -H pip install conan
+- sudo -H pip install conan --ignore-installed
 - conan user
 script:
 - conan install
