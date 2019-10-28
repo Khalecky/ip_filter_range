@@ -10,7 +10,7 @@
 
 using boost::test_tools::output_test_stream;
 
-ip_pool_t ip_pool;
+PoolIP ip_pool;
 
 void fill_ip_pool()
 {
@@ -42,7 +42,7 @@ BOOST_AUTO_TEST_CASE(test_filter_first_byte)
 
     int first_byte = 46;
 
-    rangeIP range = filter(ip_pool, first_byte);
+    auto range = filter(ip_pool, first_byte);
     BOOST_REQUIRE_EQUAL(range.size(), 2);
 
     print<output_test_stream>(range, output);
@@ -59,7 +59,7 @@ BOOST_AUTO_TEST_CASE(test_filter_two_bytes)
     int first_byte = 46;
     int second_byte = 70;
 
-    rangeIP range = filter(ip_pool, first_byte, second_byte);
+    auto range = filter(ip_pool, first_byte, second_byte);
     BOOST_REQUIRE_EQUAL(range.size(), 2);
 
     //output << __PRETTY_FUNCTION__<< std::endl;

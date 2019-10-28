@@ -11,18 +11,19 @@ using ranges::views::split;
 int main()
 {
 
+
     try
     {
-        ip_pool_t ip_pool;
+        PoolIP ip_pool;
 
         for(std::string line; std::getline(std::cin, line);)
         {
-            stringList v = line | split('\t');
+            StringList v = line | split('\t');
 
             ip_pool.push_back( IP(v.at(0)) );
         }
 
-        ranges::sort(ip_pool, std::greater<uint32_t>());
+        ranges::sort(ip_pool, std::greater<IP>());
 
         for(const auto &ip: ip_pool)
             ip.print();

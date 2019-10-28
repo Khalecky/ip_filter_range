@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
-SET (CMAKE_C_COMPILER             "clang")
-SET (CMAKE_CXX_COMPILER             "clang++")
+#SET (CMAKE_C_COMPILER             "clang")
+#SET (CMAKE_CXX_COMPILER             "clang++")
 
 project(ip_filter VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 
@@ -15,8 +15,8 @@ conan_basic_setup()
 find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 
 configure_file(version.h.in ${PROJECT_SOURCE_DIR}/version.h)
-add_executable(ip_filter main.cpp ip_filter.cpp)
-add_executable(app_tests tests/test_module.cpp ip_filter.cpp)
+add_executable(ip_filter main.cpp )
+add_executable(app_tests tests/test_module.cpp)
 
 #copy file with ip pool for tests
 file(COPY ${PROJECT_SOURCE_DIR}/tests/ip_filter.tst
