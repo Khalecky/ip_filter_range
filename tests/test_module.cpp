@@ -19,6 +19,11 @@ void fill_ip_pool()
 
     std::ifstream ifs ("ip_filter.tst");
 
+    if (!ifs)
+    {
+        std::cout << "ERROR file open ip_filter.tst" << std::endl;
+    }
+
     for(std::string line; std::getline(ifs, line);)
     {
         //std::cout << line << std::endl;
