@@ -5,9 +5,11 @@ addons:
   apt:
     packages:
     - libboost-test-dev
-
+install:
+- pip install conan
+- conan user
 script:
-- conan install . --build=missing -s compiler.libcxx=libstdc++11
+- conan install
 - cmake .
 - cmake --build .
 - cmake --build . --target test
@@ -16,5 +18,5 @@ deploy:
   provider: script
   skip_cleanup: true
   script:
-  - curl -f -T ip_filter-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -ukhalecky:$BINTRAY_API_KEY "https://api.bintray.com/content/khalecky/otus_cpp/homework/$TRAVIS_BUILD_NUMBER/ip_filter-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=xenial;deb_component=main;deb_architecture=amd64;publish=1"
+  - curl -f -T ip_filter-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -ukhalecky:$BINTRAY_API_KEY "https://api.bintray.com/content/khalecky/otus_cpp/homework/$TRAVIS_BUILD_NUMBER/range-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=xenial;deb_component=main;deb_architecture=amd64;publish=1"
 
