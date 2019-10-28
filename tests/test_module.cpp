@@ -1,7 +1,7 @@
 #define BOOST_TEST_MODULE app_tests
 
 #include <boost/test/unit_test.hpp>
-#include <boost/test/tools/output_test_stream.hpp>
+#include <boost/test/output_test_stream.hpp>
 
 #include <fstream>
 
@@ -42,8 +42,8 @@ BOOST_AUTO_TEST_CASE(test_version)
 
 BOOST_AUTO_TEST_CASE(test_filter_first_byte)
 {
-    output_test_stream output( "../ip_filter_first_byte.tst", true );
     fill_ip_pool();
+    output_test_stream output( "../ip_filter_first_byte.tst", true );
 
     int first_byte = 46;
 
@@ -58,8 +58,8 @@ BOOST_AUTO_TEST_CASE(test_filter_first_byte)
 
 BOOST_AUTO_TEST_CASE(test_filter_two_bytes)
 {
-    output_test_stream output( "../ip_filter_two_bytes.tst", true );
     fill_ip_pool();
+    output_test_stream output( "../ip_filter_two_bytes.tst", true );
 
     int first_byte = 46;
     int second_byte = 70;
