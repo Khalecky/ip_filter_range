@@ -5,10 +5,10 @@ addons:
   apt:
     packages:
     - libboost-test-dev
-    - python3
-    - python3-pip
+
 install:
-- sudo pip3 install conan
+- sudo -H pip install --upgrade pip
+- sudo -H pip install conan
 - conan user
 script:
 - conan install
