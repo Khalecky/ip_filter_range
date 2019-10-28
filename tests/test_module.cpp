@@ -14,14 +14,16 @@ PoolIP ip_pool;
 
 void fill_ip_pool()
 {
+    std::cout << __PRETTY_FUNCTION__ << std::endl;
     if (!ip_pool.empty())
         return;
 
-    std::ifstream ifs ("../ip_filter.tst");
+    std::ifstream ifs ("ip_filter.tst");
 
     if (!ifs)
     {
         std::cout << "ERROR file open ip_filter.tst" << std::endl;
+        return;
     }
 
     for(std::string line; std::getline(ifs, line);)
@@ -43,7 +45,7 @@ BOOST_AUTO_TEST_CASE(test_version)
 BOOST_AUTO_TEST_CASE(test_filter_first_byte)
 {
     fill_ip_pool();
-    output_test_stream output( "../ip_filter_first_byte.tst", true );
+    output_test_stream output( "ip_filter_first_byte.tst", true );
 
     int first_byte = 46;
 
@@ -59,7 +61,7 @@ BOOST_AUTO_TEST_CASE(test_filter_first_byte)
 BOOST_AUTO_TEST_CASE(test_filter_two_bytes)
 {
     fill_ip_pool();
-    output_test_stream output( "../ip_filter_two_bytes.tst", true );
+    output_test_stream output( "ip_filter_two_bytes.tst", true );
 
     int first_byte = 46;
     int second_byte = 70;

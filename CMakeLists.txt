@@ -53,11 +53,11 @@ enable_testing()
 
 
 SET (BUILD_BIN_DIR "${CMAKE_CURRENT_BINARY_DIR}/bin")
-#copy file with ip pool for tests
-#file(COPY ${CMAKE_BINARY_DIR}/tests/ip_filter.tst
-#     DESTINATION ${BUILD_BIN_DIR})
-#file(COPY ${CMAKE_BINARY_DIR}/tests/ip_filter_first_byte.tst
-#     DESTINATION ${BUILD_BIN_DIR})
-#file(COPY ${PROJECT_SOURCE_DIR}/tests/ip_filter_two_bytes.tst
-#     DESTINATION ${BUILD_BIN_DIR})
+copy file with ip pool for tests
+file(COPY ${CMAKE_BINARY_DIR}/tests/ip_filter.tst
+     DESTINATION ${BUILD_BIN_DIR})
+file(COPY ${CMAKE_BINARY_DIR}/tests/ip_filter_first_byte.tst
+     DESTINATION ${BUILD_BIN_DIR})
+file(COPY ${PROJECT_SOURCE_DIR}/tests/ip_filter_two_bytes.tst
+     DESTINATION ${BUILD_BIN_DIR})
 add_test(tests bin/app_tests)
