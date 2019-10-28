@@ -28,7 +28,7 @@ void fill_ip_pool()
 
     for(std::string line; std::getline(ifs, line);)
     {
-        //std::cout << line << std::endl;
+        std::cout << line << std::endl;
         ip_pool.push_back(IP(line));
     }
 
@@ -39,9 +39,10 @@ BOOST_AUTO_TEST_SUITE(app_tests)
 
 BOOST_AUTO_TEST_CASE(test_version)
 {
+    fill_ip_pool();
     BOOST_CHECK(PROJECT_VERSION_PATCH > 0);
 }
-
+/*
 BOOST_AUTO_TEST_CASE(test_filter_first_byte)
 {
     fill_ip_pool();
@@ -75,6 +76,7 @@ BOOST_AUTO_TEST_CASE(test_filter_two_bytes)
     BOOST_REQUIRE (!output.is_empty(false));
     BOOST_CHECK( output.match_pattern() );
 }
+*/
 
 
 BOOST_AUTO_TEST_SUITE_END()
