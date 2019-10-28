@@ -11,7 +11,7 @@ install:
 - sudo -H pip install conan --ignore-installed
 - conan user
 script:
-- conan install
+- conan install ./conanfile.txt
 - cmake .
 - cmake --build .
 - cmake --build . --target test
