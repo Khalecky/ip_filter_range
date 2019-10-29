@@ -46,18 +46,18 @@ BOOST_AUTO_TEST_CASE(test_version)
 BOOST_AUTO_TEST_CASE(is_files_exists)
 {
     {
-        std::ifstream ifs ("ip_filter.tst");
-        BOOST_CHECK(!bool(ifs));
+        std::ifstream ifs ("tests/ip_filter.tst");
+        BOOST_CHECK(bool(ifs));
     }
 
     {
-        std::ifstream ifs ("ip_filter_first_byte.tst");
-        BOOST_CHECK(!bool(ifs));
+        std::ifstream ifs ("tests/ip_filter_first_byte.tst");
+        BOOST_CHECK(bool(ifs));
     }
 
     {
-        std::ifstream ifs ("ip_filter_two_bytes.tst");
-        BOOST_CHECK(!bool(ifs));
+        std::ifstream ifs ("tests/ip_filter_two_bytes.tst");
+        BOOST_CHECK(bool(ifs));
     }
 }
 
