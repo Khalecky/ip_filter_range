@@ -18,7 +18,7 @@ void fill_ip_pool()
     if (!ip_pool.empty())
         return;
 
-    /*
+
     std::ifstream ifs ("ip_filter.tst");
 
     if (!ifs)
@@ -32,7 +32,6 @@ void fill_ip_pool()
         //std::cout << line << std::endl;
         ip_pool.push_back(IP(line));
     }
-    */
 
 }
 
