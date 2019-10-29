@@ -36,7 +36,6 @@ struct IP
     inline void print() const { print<std::ostream>(std::cout);}
     inline bool operator>(const IP &r) const { return bytes > r.bytes;}
     //inline bool operator<(const IP &r) const { return ! ( (*this) > r);}
-    inline bool contains(int val) const { return std::find(bytes.cbegin(), bytes.cend(), val) != bytes.cend();}
 };
 
 using PoolIP = std::vector<IP>;
@@ -62,8 +61,8 @@ inline void print(const RangeIP &range)
 inline void filter_any(const PoolIP &ip_pool, int ip_part)
 {
     for_each(ip_pool, [=](const IP& ip) {
-            if(ip.contains(ip_part))
-                ip.print();
+        if(any_of(ip.bytes, [&](const auto& byte){ return byte == ip_part;}))
+            ip.print();
     });
 }
 

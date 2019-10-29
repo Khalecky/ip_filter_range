@@ -28,7 +28,6 @@ int main()
         for(const auto &ip: ip_pool)
             ip.print();
 
-
         print(filter(ip_pool, 1));
         print(filter(ip_pool, 46, 70));
         filter_any(ip_pool, 46);
