@@ -14,10 +14,11 @@ PoolIP ip_pool;
 
 void fill_ip_pool()
 {
-    std::cout << __PRETTY_FUNCTION__ << std::endl;
+    //std::cout << __PRETTY_FUNCTION__ << std::endl;
     if (!ip_pool.empty())
         return;
 
+    /*
     std::ifstream ifs ("ip_filter.tst");
 
     if (!ifs)
@@ -31,6 +32,7 @@ void fill_ip_pool()
         //std::cout << line << std::endl;
         ip_pool.push_back(IP(line));
     }
+    */
 
 }
 
