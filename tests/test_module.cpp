@@ -19,7 +19,7 @@ void fill_ip_pool()
         return;
 
 
-    std::ifstream ifs ("ip_filter.tst");
+    std::ifstream ifs ("tests/ip_filter.tst");
 
     if (!ifs)
     {
@@ -63,11 +63,11 @@ BOOST_AUTO_TEST_CASE(is_files_exists)
 
 
 
-/*
+
 BOOST_AUTO_TEST_CASE(test_filter_first_byte)
 {
     fill_ip_pool();
-    output_test_stream output( "ip_filter_first_byte.tst", true );
+    output_test_stream output( "tests/ip_filter_first_byte.tst", true );
 
     int first_byte = 46;
 
@@ -83,7 +83,7 @@ BOOST_AUTO_TEST_CASE(test_filter_first_byte)
 BOOST_AUTO_TEST_CASE(test_filter_two_bytes)
 {
     fill_ip_pool();
-    output_test_stream output( "ip_filter_two_bytes.tst", true );
+    output_test_stream output( "tests/ip_filter_two_bytes.tst", true );
 
     int first_byte = 46;
     int second_byte = 70;
@@ -97,7 +97,7 @@ BOOST_AUTO_TEST_CASE(test_filter_two_bytes)
     BOOST_REQUIRE (!output.is_empty(false));
     BOOST_CHECK( output.match_pattern() );
 }
-*/
+
 
 
 BOOST_AUTO_TEST_SUITE_END()
