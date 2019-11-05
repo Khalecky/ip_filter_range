@@ -17,87 +17,59 @@ using StringList = std::vector<std::string>;
 
 struct IP
 {
-    std::string ip_str;
     std::vector<unsigned char> bytes; //192.168.0.1 => bytes[0] = 192, bytes[1] = 168, ...
 
-    explicit IP(const std::string &_ip_str) : ip_str(_ip_str)
+    explicit IP(const std::string &ip_str)
     {
         const StringList& bytes_str = ip_str | split('.') | to<StringList>;
-        for_each (bytes_str, [&](const std::string& byte_str) {
+        for_each (bytes_str, [&](const auto& byte_str) {
             bytes.push_back(static_cast<unsigned char>(std::stoi(byte_str)));
         });
     }
 
-    template<class T>
-    void print(T& stream) const {
-        stream << ip_str << std::endl;
+    void print() const
+    {
+        size_t i = 0;
+        for_each(bytes,[&](auto byte){ std::cout << (i != 0 ? ".": "") << static_cast<int>(byte); ++i; });
+        std::cout << std::endl;
     }
 
-    inline void print() const { print<std::ostream>(std::cout);}
-    inline bool operator>(const IP &r) const { return bytes > r.bytes;}
-    //inline bool operator<(const IP &r) const { return ! ( (*this) > r);}
+    bool operator>(const IP &r) const { return bytes > r.bytes; }
 };
 
 using PoolIP = std::vector<IP>;
-using RangeIP = std::vector<PoolIP::const_iterator>;
 
-
-template<class T>
-void print(const RangeIP &range, T& stream)
+inline void print_pool(const PoolIP &ip_pool)
 {
-    if (range.size() != 2)
-        return;
-
-    for(auto iter_ip = range.front(); iter_ip != range.back(); ++iter_ip)
-        iter_ip->print<T>(stream);
-}
-
-inline void print(const RangeIP &range)
-{
-    print<std::ostream>(range, std::cout);
+    for_each( ip_pool, [](const IP& ip){ ip.print();}  );
 }
 
 
 inline void filter_any(const PoolIP &ip_pool, int ip_part)
 {
-    for_each(ip_pool, [=](const IP& ip) {
-        if(any_of(ip.bytes, [&](const auto& byte){ return byte == ip_part;}))
-            ip.print();
-    });
+    auto grep = views::filter([&](const IP& ip) { return find(ip.bytes, ip_part) != ip.bytes.end(); });
+    print_pool(ip_pool | grep);
 }
 
 
-/*
-    return existing range of IP in vector<IP>
-    cases:
-    1) empty range - nothing found
-    2) range with two iterators: iter_from, iter_to
-*/
 template<typename ...Args>
-RangeIP filter(const PoolIP &ip_pool, Args... ip_parts)
+void filter(const PoolIP &ip_pool, Args... ip_parts)
 {
     const int count_args = sizeof...(ip_parts);
     int arr[count_args] = {ip_parts...};
 
-    RangeIP range;
-
-    auto iter_from = ip_pool.cbegin();
-    auto iter_to = ip_pool.cend();
+    PoolIP pool;
 
     for (int i = 0; i < count_args; ++i)
     {
-        iter_from = std::lower_bound( iter_from, iter_to, arr[i], [&](const IP &ip, int val) { return ip.bytes[i] > val;});
-
-        if (iter_from == iter_to)
-            return range;
-
-        iter_to = std::upper_bound( iter_from, iter_to, arr[i], [&](int val, const IP &ip) { return ip.bytes[i] < val;});
+        auto grep = views::filter([&](const IP& ip) { return ip.bytes[i] == arr[i]; });
+        if (i == 0)
+            pool = ip_pool | grep;
+        else
+            pool = pool | grep;
     }
 
-    range.push_back(iter_from);
-    range.push_back(iter_to);
-
-    return range;
+    print_pool(pool);
 }
 
 #endif // IP_FILTER_H_INCLUDED
