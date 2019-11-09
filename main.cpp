@@ -15,11 +15,10 @@ int main()
     {
         PoolIP ip_pool;
 
-        using ranges::views::split;
         for(std::string line; std::getline(std::cin, line);)
         {
-            const StringList& v = line | split('\t') | to<StringList>;
-            ip_pool.push_back( IP(v.at(0)) );
+            const std::string& s = ranges::front( line | ranges::views::split('\t') );
+            ip_pool.push_back( IP(s) );
         }
 
         ranges::sort(ip_pool, std::greater<IP>());
