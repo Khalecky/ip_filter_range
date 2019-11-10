@@ -17,8 +17,10 @@ int main()
 
         for(std::string line; std::getline(std::cin, line);)
         {
-            const std::string& s = ranges::front( line | ranges::views::split('\t') );
-            ip_pool.push_back( IP(s) );
+            //const std::string& s = ranges::front( line | ranges::views::split('\t') );
+            //ip_pool.push_back( IP(s) );
+            IP ip( split(line, '\t')[0]);
+            ip_pool.push_back( ip );
         }
 
         ranges::sort(ip_pool, std::greater<IP>());

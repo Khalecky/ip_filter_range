@@ -10,10 +10,30 @@
 #include <range/v3/all.hpp>
 
 using namespace ranges;
-using views::split;
+//using views::split;
 
 
 using StringList = std::vector<std::string>;
+
+inline StringList split(const std::string &str, char sep)
+{
+    StringList r;
+
+    std::string::size_type start = 0;
+
+    std::string::size_type stop = str.find_first_of(sep);
+    while(stop != std::string::npos)
+    {
+        r.push_back(str.substr(start, stop - start));
+
+        start = stop + 1;
+        stop = str.find_first_of(sep, start);
+    }
+
+    r.push_back(str.substr(start));
+
+    return r;
+}
 
 struct IP
 {
@@ -21,7 +41,7 @@ struct IP
 
     explicit IP(const std::string &ip_str)
     {
-        const StringList& bytes_str = ip_str | split('.') | to<StringList>;
+        const StringList& bytes_str = split(ip_str, '.'); //ip_str | split('.') | to<StringList>;
         for_each (bytes_str, [&](const auto& byte_str) {
             bytes.push_back(static_cast<unsigned char>(std::stoi(byte_str)));
         });
